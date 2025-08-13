@@ -13,8 +13,7 @@ python EC1.py <caminho_para_o_arquivo.ec1>
 import sys
 
 # DEFINIÇÃO DA ESTRUTURA DE DADOS DO TOKEN
-# Conforme a seção 3.1 do documento, cada token precisa de um tipo,
-# um lexema e sua posição. Usamos uma classe simples para organizar esses dados.
+# Cada token precisa de um tipo, um lexema e sua posição. Usamos uma classe simples para organizar esses dados.
 class Token:
     def __init__(self, tipo, lexema, posicao):
         self.tipo = tipo
@@ -22,7 +21,6 @@ class Token:
         self.posicao = posicao
 
     # A representação em string segue o formato <tipo, lexema, posicao>
-    # solicitado no exemplo da seção 3.2 do documento.
     def __repr__(self):
         return f"<{self.tipo}, '{self.lexema}', {self.posicao}>"
 
@@ -37,14 +35,13 @@ def analisador_lexico_ec1(codigo_fonte):
     while posicao_atual < tamanho_codigo:
         caractere_atual = codigo_fonte[posicao_atual]
 
-        # Ignorar espaços em branco (conforme requisito da seção 4).
+        # Ignorar espaços em branco.
         # Eles não geram tokens, apenas avançam a posição.
         if caractere_atual.isspace():
             posicao_atual += 1
             continue
 
         # Reconhecer operadores e pontuação (tokens de um único caractere).
-        # A seção 3.1 sugere tipos específicos para cada operador e pontuação.
         if caractere_atual == '(':
             tokens.append(Token('ParenEsq', '(', posicao_atual))
             posicao_atual += 1
@@ -65,7 +62,7 @@ def analisador_lexico_ec1(codigo_fonte):
             posicao_atual += 1
 
         # Reconhecer literais inteiros (números).
-        # Um número é uma sequência de um ou more dígitos (seção 1).
+        # Um número é uma sequência de um ou more dígitos.
         # A análise léxica agrupa esses dígitos em um único token 'Numero'.
         elif caractere_atual.isdigit():
             lexema = ''
